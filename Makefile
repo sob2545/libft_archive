@@ -6,7 +6,7 @@
 #    By: sesim <sesim@student.42seoul.kr>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/09 11:16:18 by sesim             #+#    #+#              #
-#    Updated: 2022/06/08 12:10:10 by sesim            ###   ########.fr        #
+#    Updated: 2022/06/08 13:05:41 by sesim            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,6 +15,7 @@ CFLAGS = -Wall -Wextra -Werror
 AR = ar rcs
 RM = rm -f
 NAME = libft.a
+SHELL = /bin/bash
 
 LIBFT_DIR = ./libft_src/
 GNL_DIR = ./gnl_src/
@@ -74,7 +75,13 @@ SRCS = $(LIBFT_DIR)ft_atoi.c \
 OBJS = $(SRCS:%.c=%.o)
 
 %.o : %.c
-	$(CC) $(CFLAGS) -c $^ -o $@
+	let _progress=(${1}*100/${2}*100)/100
+	let _done=(${_progress}*4)/100
+	let _left=40-$_done
+	_fill=$(printf "%${_done}s")
+	_empty=$(printf "%${_left}s")
+	@printf "\rProgress : |${fill// /█}${_empty// / }| ${_progress}%%"
+	@$(CC) $(CFLAGS) -c $^ -o $@
 
 all : $(NAME)
 
