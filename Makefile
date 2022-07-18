@@ -6,7 +6,7 @@
 #    By: sesim <sesim@student.42seoul.kr>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/09 11:16:18 by sesim             #+#    #+#              #
-#    Updated: 2022/06/08 13:05:41 by sesim            ###   ########.fr        #
+#    Updated: 2022/07/19 08:05:46 by sesim            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,6 +22,8 @@ GNL_DIR = ./gnl_src/
 PRINTF_DIR = ./ft_printf_src/
 
 SRCS = $(LIBFT_DIR)ft_atoi.c \
+	   $(LIBFT_DIR)ft_adtoi.c \
+	   $(LIBFT_DIR)ft_atoi_hex.c \
 	   $(LIBFT_DIR)ft_bzero.c \
 	   $(LIBFT_DIR)ft_calloc.c \
 	   $(LIBFT_DIR)ft_isalnum.c \
@@ -64,6 +66,7 @@ SRCS = $(LIBFT_DIR)ft_atoi.c \
 	   $(LIBFT_DIR)ft_lstclear.c \
 	   $(LIBFT_DIR)ft_lstiter.c \
 	   $(LIBFT_DIR)ft_lstmap.c \
+	   $(GNL_DIR)get_file.c \
 	   $(GNL_DIR)get_next_line.c \
 	   $(GNL_DIR)get_next_line_utils.c \
 	   $(PRINTF_DIR)ft_printf.c \
@@ -75,12 +78,6 @@ SRCS = $(LIBFT_DIR)ft_atoi.c \
 OBJS = $(SRCS:%.c=%.o)
 
 %.o : %.c
-	let _progress=(${1}*100/${2}*100)/100
-	let _done=(${_progress}*4)/100
-	let _left=40-$_done
-	_fill=$(printf "%${_done}s")
-	_empty=$(printf "%${_left}s")
-	@printf "\rProgress : |${fill// /█}${_empty// / }| ${_progress}%%"
 	@$(CC) $(CFLAGS) -c $^ -o $@
 
 all : $(NAME)

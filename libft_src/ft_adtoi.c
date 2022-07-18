@@ -1,19 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atoi.c                                          :+:      :+:    :+:   */
+/*   ft_adtoi.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sesim <sesim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 13:18:55 by sesim             #+#    #+#             */
-/*   Updated: 2022/06/29 12:21:22 by sesim            ###   ########.fr       */
+/*   Updated: 2022/06/17 08:05:02 by sesim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
 
 int	ft_isdigit(int c);
-int	ft_isspace(int c);
 
 int	check_val(size_t nb, int pn)
 {
@@ -24,7 +23,7 @@ int	check_val(size_t nb, int pn)
 	return ((int)nb * pn);
 }
 
-int	ft_atoi(const char *str)
+int	ft_adtoi(const char *str)
 {
 	unsigned int	i;
 	size_t			res;
@@ -33,16 +32,16 @@ int	ft_atoi(const char *str)
 	i = 0;
 	res = 0;
 	pn = 1;
-	while (ft_isspace(*str))
-		i++;
 	if (str[i] == 43 || str[i] == 45)
 	{
 		if (str[i] == 45)
 			pn *= -1;
 		i++;
 	}
-	while (ft_isdigit(str[i]) && *str)
+	while (str[i])
 	{
+		if (!ft_isdigit(str[i]))
+			return (0);
 		res *= 10;
 		res += str[i] - 48;
 		i++;
